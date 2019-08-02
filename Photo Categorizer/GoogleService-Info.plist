@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AD_UNIT_ID_FOR_BANNER_TEST</key>
+	<string>ca-app-pub-3940256099942544/2934735716</string>
+	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
+	<string>ca-app-pub-3940256099942544/4411468910</string>
+	<key>CLIENT_ID</key>
+	<string>603943508393-6aqlovunfnarspq4ucmj7v06opk96ph9.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.603943508393-6aqlovunfnarspq4ucmj7v06opk96ph9</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBYZegvzrFo69kzmrFovV17RidoVEC2uzA</string>
+	<key>GCM_SENDER_ID</key>
+	<string>603943508393</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>miajohansson.clickandfile</string>
+	<key>PROJECT_ID</key>
+	<string>click-and-file</string>
+	<key>STORAGE_BUCKET</key>
+	<string>click-and-file.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<true></true>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<false></false>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:603943508393:ios:13beacb5bf03736e</string>
+	<key>DATABASE_URL</key>
+	<string>https://click-and-file.firebaseio.com</string>
+	<key>ADMOB_APP_ID</key>
+	<string>ca-app-pub-4566416931763342~8205787497</string>
+</dict>
+</plist>
