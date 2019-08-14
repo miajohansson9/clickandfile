@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3B4C39B500F53B6445CB297F /* Pods_Photo_Categorizer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01429424EED51E779CD7ED7A /* Pods_Photo_Categorizer.framework */; };
-		E10A403622033EB9001A034F /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E1C9603B22033E0200A2D982 /* Info.plist */; };
+		53B5D3A92303936C00818945 /* PersistanceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B5D3A82303936B00818945 /* PersistanceService.swift */; };
 		E10A403822033EE7001A034F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E10A403722033EE7001A034F /* GoogleService-Info.plist */; };
 		E112198A21D9876C00E4F220 /* PremiumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E112198921D9876C00E4F220 /* PremiumViewController.swift */; };
 		E1313DE820478186002DC39D /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1313DE720478186002DC39D /* StoreKit.framework */; };
@@ -29,12 +29,12 @@
 		E1D31AD8203907250066E9A0 /* CategoryAlbumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D31AD7203907250066E9A0 /* CategoryAlbumViewController.swift */; };
 		E1D31ADA203907630066E9A0 /* CategoryAlbumCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D31AD9203907630066E9A0 /* CategoryAlbumCollectionViewCell.swift */; };
 		E1D7818B20395585003AF1C6 /* NavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D7818A20395585003AF1C6 /* NavigationViewController.swift */; };
-		E1EAF1EA21D8152F001D8FE3 /* PersistanceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1EAF1E921D8152F001D8FE3 /* PersistanceService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		01429424EED51E779CD7ED7A /* Pods_Photo_Categorizer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Photo_Categorizer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E1A218FD161AC96286810E0 /* Pods-Photo_Categorizer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Photo_Categorizer.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Photo_Categorizer/Pods-Photo_Categorizer.debug.xcconfig"; sourceTree = "<group>"; };
+		53B5D3A82303936B00818945 /* PersistanceService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistanceService.swift; sourceTree = "<group>"; };
 		982F54091911BF69841870F2 /* Pods-Photo_Categorizer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Photo_Categorizer.release.xcconfig"; path = "Pods/Target Support Files/Pods-Photo_Categorizer/Pods-Photo_Categorizer.release.xcconfig"; sourceTree = "<group>"; };
 		E10A403722033EE7001A034F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E112198921D9876C00E4F220 /* PremiumViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumViewController.swift; sourceTree = "<group>"; };
@@ -58,7 +58,6 @@
 		E1D31AD7203907250066E9A0 /* CategoryAlbumViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryAlbumViewController.swift; sourceTree = "<group>"; };
 		E1D31AD9203907630066E9A0 /* CategoryAlbumCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryAlbumCollectionViewCell.swift; sourceTree = "<group>"; };
 		E1D7818A20395585003AF1C6 /* NavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationViewController.swift; sourceTree = "<group>"; };
-		E1EAF1E921D8152F001D8FE3 /* PersistanceService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PersistanceService.swift; path = "../../../Photo_Categorizer 2/Photo Categorizer/CoreData/PersistanceService.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,8 +94,8 @@
 		E1406F3020369AD600AF14EA /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				53B5D3A82303936B00818945 /* PersistanceService.swift */,
 				E1511D47200162F90005AE36 /* AppDelegate.swift */,
-				E1EAF1E921D8152F001D8FE3 /* PersistanceService.swift */,
 				E1B28CFF2035E7C100EA29A9 /* Images+CoreDataClass.swift */,
 				E1B28D002035E7C100EA29A9 /* Images+CoreDataProperties.swift */,
 				E1406F282036649C00AF14EA /* Photo_Categorizer.xcdatamodeld */,
@@ -218,7 +217,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E10A403622033EB9001A034F /* Info.plist in Resources */,
 				E1868D5A22033C1B00F05228 /* Photo_Categorizer.xcdatamodeld in Resources */,
 				E1511D52200162F90005AE36 /* LaunchScreen.storyboard in Resources */,
 				E1511D4F200162F90005AE36 /* Assets.xcassets in Resources */,
@@ -254,7 +252,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Photo_Categorizer/Pods-Photo_Categorizer-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-Photo_Categorizer/Pods-Photo_Categorizer-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyStoreKit/SwiftyStoreKit.framework",
@@ -269,7 +267,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Photo_Categorizer/Pods-Photo_Categorizer-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Photo_Categorizer/Pods-Photo_Categorizer-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -284,8 +282,8 @@
 				E1D7818B20395585003AF1C6 /* NavigationViewController.swift in Sources */,
 				E1D31ADA203907630066E9A0 /* CategoryAlbumCollectionViewCell.swift in Sources */,
 				E112198A21D9876C00E4F220 /* PremiumViewController.swift in Sources */,
+				53B5D3A92303936C00818945 /* PersistanceService.swift in Sources */,
 				E1511D5C20016AD40005AE36 /* AlbumCollectionViewCell.swift in Sources */,
-				E1EAF1EA21D8152F001D8FE3 /* PersistanceService.swift in Sources */,
 				E1511D5E200177B90005AE36 /* CameraViewController.swift in Sources */,
 				E1AF3E52203BAFAC000CDF49 /* PopUpViewController.swift in Sources */,
 				E1B28D022035E7C100EA29A9 /* Images+CoreDataProperties.swift in Sources */,
