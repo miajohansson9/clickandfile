@@ -29,7 +29,13 @@ func getImages() {
     for (indexOfImage, i) in imagesArray.enumerated() {
         let indexOfCategory: Int = categories.index(of: i.category!)!
         if let imageData = i.image {
-            categoriesImageArray[indexOfCategory].append(resizeImage(image: UIImage(data: imageData as Data,scale:0.01)!, newWidth: 150))
+
+            guard let image = UIImage(data: imageData as Data, scale: 0.01) else {
+                print("Unable to get image")
+                return
+            }
+
+            categoriesImageArray[indexOfCategory].append(image.resizeImage(newWidth: 150))
             categoriesIndexArray[indexOfCategory].append(indexOfImage)
             ImagesIDArray[indexOfCategory].append(Int(i.id))
         }
