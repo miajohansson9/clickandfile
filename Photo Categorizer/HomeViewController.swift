@@ -29,19 +29,6 @@ let banner1 = GADBannerView(adSize: kGADAdSizeBanner)
 
 private var firstLaunch : Bool = false
 
-public func resizeImage(image: UIImage, newWidth: CGFloat) -> UIImage {
-    let scale = newWidth / image.size.width
-    let newHeight = image.size.height * scale
-    
-    UIGraphicsBeginImageContext(CGSize(width: newWidth, height: newHeight))
-    
-    image.draw(in: CGRect(x: 0, y: 0,width: newWidth, height: newHeight))
-    let newImage = UIGraphicsGetImageFromCurrentImageContext()
-    UIGraphicsEndImageContext()
-    
-    return newImage!
-}
-
 class HomeViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, GADBannerViewDelegate {
     
     @IBOutlet var homeCollectionView: UICollectionView!
@@ -135,7 +122,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         
         if indexPath[1] < (categories.count) {
             if categoriesIndexArray[indexPath[1]].last != nil {
-                cell.thumbnailImage.image = resizeImage(image: UIImage(data: imagesArray[categoriesIndexArray[indexPath[1]].last!].image! as Data,scale:0.01)!, newWidth: 350)
+                cell.thumbnailImage.image = UIImage(data: imagesArray[categoriesIndexArray[indexPath[1]].last!].image! as Data,scale:0.01)!
                 cell.edit.isHidden = false
                 cell.CategoryName.text = categories[indexPath[1]]
             } else {

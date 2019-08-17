@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="lap-dW-zf0">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="lap-dW-zf0">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -491,6 +491,13 @@ Upgrade now to get...
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <activityIndicatorView hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="DGP-BS-edi">
+                                <rect key="frame" x="169" y="347" width="37" height="37"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="37" id="E5f-tf-5ML"/>
+                                    <constraint firstAttribute="height" constant="37" id="NWe-7D-5FD"/>
+                                </constraints>
+                            </activityIndicatorView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tb0-ui-As2">
                                 <rect key="frame" x="157.5" y="577" width="60" height="60"/>
                                 <color key="backgroundColor" red="1" green="0.0" blue="0.50196081400000003" alpha="0.0" colorSpace="calibratedRGB"/>
@@ -550,6 +557,8 @@ Upgrade now to get...
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="esF-Y7-iyc" firstAttribute="top" secondItem="8KK-pC-YUY" secondAttribute="top" constant="12" id="7wb-GJ-lvO"/>
+                            <constraint firstItem="DGP-BS-edi" firstAttribute="centerY" secondItem="8KK-pC-YUY" secondAttribute="centerY" id="CST-uL-9x0"/>
+                            <constraint firstItem="DGP-BS-edi" firstAttribute="centerX" secondItem="8KK-pC-YUY" secondAttribute="centerX" id="FPc-47-ryT"/>
                             <constraint firstItem="R4A-b6-s7P" firstAttribute="leading" secondItem="8KK-pC-YUY" secondAttribute="leading" constant="20" id="GSV-Og-Mcz"/>
                             <constraint firstAttribute="bottom" secondItem="Tb0-ui-As2" secondAttribute="bottom" constant="30" id="J8b-QM-CNw"/>
                             <constraint firstItem="nmT-RO-OeC" firstAttribute="leading" secondItem="8KK-pC-YUY" secondAttribute="leading" constant="20" id="JSE-9C-SRD"/>
@@ -566,6 +575,7 @@ Upgrade now to get...
                         </connections>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="DGP-BS-edi" id="RgQ-0P-iMI"/>
                         <outlet property="back" destination="esF-Y7-iyc" id="ttb-Ew-eo9"/>
                         <outlet property="cameraButton" destination="Tb0-ui-As2" id="3gk-fC-Uqa"/>
                         <outlet property="flip" destination="RGi-Xy-88h" id="vdz-B1-q1F"/>
@@ -605,12 +615,12 @@ Upgrade now to get...
         <image name="back" width="2000" height="2000"/>
         <image name="button-shutter" width="122" height="122"/>
         <image name="cancel" width="512" height="512"/>
-        <image name="crown" width="186" height="108.23999786376953"/>
-        <image name="download" width="28.799999237060547" height="28.799999237060547"/>
+        <image name="crown" width="775" height="451"/>
+        <image name="download" width="40" height="40"/>
         <image name="edit" width="128" height="128"/>
-        <image name="plus" width="48" height="48"/>
-        <image name="switch" width="384" height="384"/>
-        <image name="trash" width="7.8126001358032227" height="7.8126001358032227"/>
+        <image name="plus" width="50" height="50"/>
+        <image name="switch" width="512" height="512"/>
+        <image name="trash" width="100" height="100"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="RsU-We-wle"/>

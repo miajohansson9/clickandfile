@@ -122,18 +122,15 @@ class ShowFullViewController: UIViewController, UIScrollViewDelegate, GADBannerV
     }
     
     @objc func image(_ image: UIImage, didFinishSavingWithError error: NSError?, contextInfo: UnsafeRawPointer) {
-        if let error = error {
-            // we got back an error!
-            let alert = UIAlertController(title: "An error occured", message: "Your image was not saved to your camera roll.", preferredStyle: .alert)
-            let okAction = UIAlertAction(title: "Okay", style: .default, handler: nil)
-            alert.addAction(okAction)
-            self.present(alert, animated: true, completion: nil)
-        } else {
-            let alert = UIAlertController(title: "Saved", message: "Your image was saved to your camera roll.", preferredStyle: .alert)
-            let okAction = UIAlertAction(title: "Okay", style: .default, handler: nil)
-            alert.addAction(okAction)
-            self.present(alert, animated: true, completion: nil)
-        }
+        // Getting alert title and message
+        let alertTitle = (error == nil) ? "Saved" : "An error occured"
+        let alertMessage = (error == nil) ? "Your image was not saved to your camera roll." : "Your image was saved to your camera roll."
+
+        // Creating and presenting alert.
+        let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "Okay", style: .default, handler: nil)
+        alert.addAction(okAction)
+        self.present(alert, animated: true, completion: nil)
     }
     
     override func didReceiveMemoryWarning() {

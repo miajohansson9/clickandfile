@@ -16,7 +16,8 @@ class CameraViewController: UIViewController, UIGestureRecognizerDelegate {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet var flip: UIButton!
     @IBOutlet var back: UIButton!
-    
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+
     var captureSession = AVCaptureSession()
     
     // which camera input do we want to use
@@ -25,7 +26,7 @@ class CameraViewController: UIViewController, UIGestureRecognizerDelegate {
     var currentDevice: AVCaptureDevice?
         
     // output device
-    var stillImageOutput: AVCaptureStillImageOutput?
+    var stillImageOutput = AVCapturePhotoOutput()
     var stillImage: UIImage?
     
     // camera preview layer
@@ -36,6 +37,8 @@ class CameraViewController: UIViewController, UIGestureRecognizerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        self.activityIndicator.hidesWhenStopped = true
 
         let leftSwipe = UISwipeGestureRecognizer(target:self, action: #selector(swipeAction(swipe:)))
         leftSwipe.direction = UISwipeGestureRecognizerDirection.right
@@ -53,16 +56,12 @@ class CameraViewController: UIViewController, UIGestureRecognizerDelegate {
         }
         
         currentDevice = backFacingCamera
-        
-        // configure the session with the output for capturing our still image
-        stillImageOutput = AVCaptureStillImageOutput()
-        stillImageOutput?.outputSettings = [AVVideoCodecKey : AVVideoCodecJPEG]
-        
+
         do {
             let captureDeviceInput = try AVCaptureDeviceInput(device: currentDevice!)
             
             captureSession.addInput(captureDeviceInput)
-            captureSession.addOutput(stillImageOutput!)
+            captureSession.addOutput(stillImageOutput)
             
             // set up the camera preview layer
             cameraPreviewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
@@ -74,6 +73,7 @@ class CameraViewController: UIViewController, UIGestureRecognizerDelegate {
             view.bringSubview(toFront: imageView)
             view.bringSubview(toFront: flip)
             view.bringSubview(toFront: back)
+            view.bringSubview(toFront: activityIndicator)
             
             captureSession.startRunning()
             
@@ -141,29 +141,21 @@ class CameraViewController: UIViewController, UIGestureRecognizerDelegate {
     
     @IBAction func shutterButtonDidTap()
     {
-        let myActivityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.whiteLarge)
-        myActivityIndicator.center = view.center
-        myActivityIndicator.hidesWhenStopped = true
-        myActivityIndicator.startAnimating()
-        view.addSubview(myActivityIndicator)
-        
-        let videoConnection = stillImageOutput?.connection(with: AVMediaType.video)
+        self.activityIndicator.startAnimating()
 
-        // capture a still image asynchronously
-        stillImageOutput?.captureStillImageAsynchronously(from: videoConnection!, completionHandler: { (imageDataBuffer, error) in
-            if let imageData = AVCapturePhotoOutput.jpegPhotoDataRepresentation(forJPEGSampleBuffer: imageDataBuffer!, previewPhotoSampleBuffer: imageDataBuffer!) {
-                self.stillImage = UIImage(data: imageData)
-                let image = self.stillImage
-                self.imageView.isHidden = false
-                myActivityIndicator.stopAnimating()
-                self.imageView.image = resizeImage(image: image!, newWidth: 200)
-                self.uploadImage(image: image!)
-            }
-        })
+        // Initializating the settings and capturing photo
+        let settings = AVCapturePhotoSettings(format: [AVVideoCodecKey : AVVideoCodecType.jpeg])
+        stillImageOutput.capturePhoto(with: settings, delegate: self)
     }
 
     func uploadImage(image: UIImage) {
-        imageData = NSData(data: UIImageJPEGRepresentation(image, 0.5)!)
+
+        guard let data = UIImageJPEGRepresentation(image, 0.5) else {
+            print("Unable to get data from image")
+            return
+        }
+
+        imageData = NSData(data: data)
         let storedImage = Images(context: PersistanceService.context)
         storedImage.image = imageData
         storedImage.category = categories[send!]
@@ -171,7 +163,7 @@ class CameraViewController: UIViewController, UIGestureRecognizerDelegate {
         PersistanceService.saveContext()
         imagesArray.append(storedImage)
         
-        categoriesImageArray[send!].append(resizeImage(image: UIImage(data: storedImage.image! as Data,scale:0.01)!, newWidth: 150))
+        categoriesImageArray[send!].append (image)
         categoriesIndexArray[send!].append(imagesArray.count - 1)
     }
     
@@ -201,3 +193,26 @@ extension UIViewController {
     }
 }
 
+extension CameraViewController: AVCapturePhotoCaptureDelegate {
+    func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
+
+        guard let cgImage = photo.cgImageRepresentation()?.takeUnretainedValue(),
+            let orientation = photo.metadata[kCGImagePropertyOrientation as String] as? NSNumber,
+            let uiOrientation = UIImage.Orientation(rawValue: orientation.intValue) else {
+            return
+        }
+
+        let image = UIImage(cgImage: cgImage, scale: 1, orientation: uiOrientation)
+
+        self.stillImage = image
+
+        // UI work must be done on the main thread
+        DispatchQueue.main.async {
+            self.activityIndicator.stopAnimating()
+            self.imageView.isHidden = false
+            self.imageView.image = image
+        }
+
+        self.uploadImage(image: image)
+    }
+}
