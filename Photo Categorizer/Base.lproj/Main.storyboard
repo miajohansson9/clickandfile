@@ -203,7 +203,7 @@ Upgrade now to get...
         <!--Category-->
         <scene sceneID="0jk-DA-t7W">
             <objects>
-                <viewController id="ZLy-Bf-eBY" customClass="CategoryAlbumViewController" customModule="Photo_Categorizer" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="categoryAlbum" id="ZLy-Bf-eBY" customClass="CategoryAlbumViewController" customModule="Photo_Categorizer" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="IMD-fA-mBV">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -228,16 +228,26 @@ Upgrade now to get...
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="sT5-hF-awp">
                                                     <rect key="frame" x="0.0" y="0.0" width="168" height="156"/>
                                                 </imageView>
+                                                <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="selected" translatesAutoresizingMaskIntoConstraints="NO" id="3nP-8s-dA3">
+                                                    <rect key="frame" x="13" y="30" width="25" height="25"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="25" id="HYp-XF-Fkr"/>
+                                                        <constraint firstAttribute="width" constant="25" id="a7e-Qo-Lsv"/>
+                                                    </constraints>
+                                                </imageView>
                                             </subviews>
                                         </view>
                                         <constraints>
+                                            <constraint firstItem="3nP-8s-dA3" firstAttribute="leading" secondItem="Nbe-SQ-TZg" secondAttribute="leadingMargin" constant="5" id="PNU-KL-f54"/>
                                             <constraint firstItem="sT5-hF-awp" firstAttribute="top" secondItem="Nbe-SQ-TZg" secondAttribute="top" id="Pgl-8D-3mI"/>
                                             <constraint firstAttribute="bottom" secondItem="sT5-hF-awp" secondAttribute="bottom" id="lsE-Bo-0fD"/>
                                             <constraint firstAttribute="trailing" secondItem="sT5-hF-awp" secondAttribute="trailing" id="vhS-Ec-a4l"/>
                                             <constraint firstItem="sT5-hF-awp" firstAttribute="leading" secondItem="Nbe-SQ-TZg" secondAttribute="leading" id="voJ-qI-zMZ"/>
+                                            <constraint firstItem="3nP-8s-dA3" firstAttribute="top" secondItem="Nbe-SQ-TZg" secondAttribute="topMargin" constant="2" id="xIV-SS-coI"/>
                                         </constraints>
                                         <connections>
                                             <outlet property="CategoryAlbumCellImage" destination="sT5-hF-awp" id="McN-cV-xXe"/>
+                                            <outlet property="selectedImageView" destination="3nP-8s-dA3" id="0bF-eA-IRC"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -519,7 +529,7 @@ Upgrade now to get...
                                     <constraint firstAttribute="width" constant="80" id="So1-Uq-yfJ"/>
                                 </constraints>
                                 <connections>
-                                    <segue destination="ZLy-Bf-eBY" kind="show" id="RsU-We-wle"/>
+                                    <action selector="previewButtonAction:" destination="kUP-8h-XoF" eventType="touchUpInside" id="R5w-f0-Bn4"/>
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="R4A-b6-s7P">
@@ -619,11 +629,9 @@ Upgrade now to get...
         <image name="download" width="40" height="40"/>
         <image name="edit" width="128" height="128"/>
         <image name="plus" width="50" height="50"/>
+        <image name="selected" width="57" height="58"/>
         <image name="switch" width="512" height="512"/>
         <image name="trash" width="100" height="100"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="RsU-We-wle"/>
-    </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.20000000300000001" green="0.20000000300000001" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
 </document>
