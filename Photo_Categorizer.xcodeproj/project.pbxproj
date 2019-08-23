@@ -14,6 +14,8 @@
 		53112A82230A2EC3004BFADC /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53112A81230A2EC3004BFADC /* HomeViewModel.swift */; };
 		53112A89230A2F59004BFADC /* Album+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53112A88230A2F59004BFADC /* Album+CoreDataProperties.swift */; };
 		53112A8A230A2F59004BFADC /* Album+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53112A87230A2F59004BFADC /* Album+CoreDataClass.swift */; };
+		53896784230F8F67001697F4 /* Model1to2.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 53896783230F8F67001697F4 /* Model1to2.xcmappingmodel */; };
+		53896786230F9020001697F4 /* IntToStringMigration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53896785230F9020001697F4 /* IntToStringMigration.swift */; };
 		53C67F562305074C0048B9C8 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C67F552305074C0048B9C8 /* UIImage+Extension.swift */; };
 		E10A403822033EE7001A034F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E10A403722033EE7001A034F /* GoogleService-Info.plist */; };
 		E112198A21D9876C00E4F220 /* PremiumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E112198921D9876C00E4F220 /* PremiumViewController.swift */; };
@@ -47,6 +49,8 @@
 		53112A81230A2EC3004BFADC /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		53112A87230A2F59004BFADC /* Album+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Album+CoreDataClass.swift"; path = "/Users/ismaelzavala/clickandfile/Photo Categorizer/CoreData/Album+CoreDataClass.swift"; sourceTree = "<absolute>"; };
 		53112A88230A2F59004BFADC /* Album+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Album+CoreDataProperties.swift"; path = "/Users/ismaelzavala/clickandfile/Photo Categorizer/CoreData/Album+CoreDataProperties.swift"; sourceTree = "<absolute>"; };
+		53896783230F8F67001697F4 /* Model1to2.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = Model1to2.xcmappingmodel; sourceTree = "<group>"; };
+		53896785230F9020001697F4 /* IntToStringMigration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntToStringMigration.swift; sourceTree = "<group>"; };
 		53C67F552305074C0048B9C8 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		982F54091911BF69841870F2 /* Pods-Photo_Categorizer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Photo_Categorizer.release.xcconfig"; path = "Pods/Target Support Files/Pods-Photo_Categorizer/Pods-Photo_Categorizer.release.xcconfig"; sourceTree = "<group>"; };
 		E10A403722033EE7001A034F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -118,6 +122,15 @@
 			path = "View Models";
 			sourceTree = "<group>";
 		};
+		53896782230F8F41001697F4 /* Migration */ = {
+			isa = PBXGroup;
+			children = (
+				53896783230F8F67001697F4 /* Model1to2.xcmappingmodel */,
+				53896785230F9020001697F4 /* IntToStringMigration.swift */,
+			);
+			path = Migration;
+			sourceTree = "<group>";
+		};
 		53C67F542305073D0048B9C8 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -180,6 +193,7 @@
 			isa = PBXGroup;
 			children = (
 				E1511D47200162F90005AE36 /* AppDelegate.swift */,
+				53896782230F8F41001697F4 /* Migration */,
 				53112A7A2309ECA8004BFADC /* Cells */,
 				53112A80230A2E9B004BFADC /* View Models */,
 				53112A792309EC89004BFADC /* View Controllers */,
@@ -339,12 +353,14 @@
 				E1511D5C20016AD40005AE36 /* AlbumCollectionViewCell.swift in Sources */,
 				E1511D5E200177B90005AE36 /* CameraViewController.swift in Sources */,
 				53112A7E2309FCD3004BFADC /* PersistanceLayer.swift in Sources */,
+				53896786230F9020001697F4 /* IntToStringMigration.swift in Sources */,
 				E1AF3E52203BAFAC000CDF49 /* PopUpViewController.swift in Sources */,
 				E1B28D022035E7C100EA29A9 /* Images+CoreDataProperties.swift in Sources */,
 				53112A8A230A2F59004BFADC /* Album+CoreDataClass.swift in Sources */,
 				E17E4CDB21E6736D00E82FB6 /* HomeViewController.swift in Sources */,
 				53C67F562305074C0048B9C8 /* UIImage+Extension.swift in Sources */,
 				530FF2C2230B839900F85D9C /* CategoryAlbumViewModel.swift in Sources */,
+				53896784230F8F67001697F4 /* Model1to2.xcmappingmodel in Sources */,
 				E13DD5E721D8AE4A001F7BB6 /* IAPService.swift in Sources */,
 				E1D31AD8203907250066E9A0 /* CategoryAlbumViewController.swift in Sources */,
 				E13DD5E521D8AE02001F7BB6 /* IAPProduct.swift in Sources */,

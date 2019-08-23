@@ -189,9 +189,10 @@ class CategoryAlbumViewController: UIViewController, UICollectionViewDataSource,
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 
-        guard let selectedImage = selectedImages?[indexPath.row] else { return }
-
         if editSelected == true {
+
+            guard let selectedImage = selectedImages?[indexPath.row] else { return }
+
             if collectionViewAlbum.cellForItem(at: indexPath)?.contentView.alpha == 1 {
                 imageViews[indexPath[1]].isHidden = false
                 collectionViewAlbum.cellForItem(at: indexPath)?.contentView.alpha = 0.8
@@ -205,7 +206,20 @@ class CategoryAlbumViewController: UIViewController, UICollectionViewDataSource,
                 })
             }
         } else {
-            performSegue(withIdentifier: "fullView", sender: nil)
+
+            guard let selectedPicture = viewModel?.allPictures[indexPath.row] else {
+                //unable to get image
+                return
+            }
+
+            // Initializing next view controller
+            guard let fullScreenVC = self.storyboard?.instantiateViewController(withIdentifier: "fullView") as? ShowFullViewController else {
+                //Unable to initialize view controller
+                return
+            }
+
+            fullScreenVC.selectedPhoto = selectedPicture
+            self.navigationController?.pushViewController(fullScreenVC, animated: true)
         }
     }
     

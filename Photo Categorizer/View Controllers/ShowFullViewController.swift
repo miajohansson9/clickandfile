@@ -19,8 +19,11 @@ class ShowFullViewController: UIViewController, UIScrollViewDelegate, GADBannerV
     @IBOutlet var toolBarContraintTop: NSLayoutConstraint!
     var showing = true
 
-    //TODO: rename to image
+    // The image passed by the previous view controller
     var selectedPhoto: Images?
+
+    // Data layer
+    var dataLayer = PersistanceLayer<Images>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,6 +47,10 @@ class ShowFullViewController: UIViewController, UIScrollViewDelegate, GADBannerV
             banner3.delegate = self
             banner3.load(request)
             print("banner")
+        }
+
+        if let selectedImage = selectedPhoto?.image {
+            image.image = UIImage(data: selectedImage)
         }
     }
     
@@ -97,15 +104,17 @@ class ShowFullViewController: UIViewController, UIScrollViewDelegate, GADBannerV
     }
     
     func alertYesPress() {
+        if let photoToDelete = selectedPhoto {
+            dataLayer.delete(photoToDelete)
+        }
 
-        //TODO: delete photo from database and continue with segue 
-        
-        performSegue(withIdentifier: "unwindToCategory", sender: self)
+        self.navigationController?.popViewController(animated: true)
     }
     
     @IBAction func downloadImage(_ sender: Any) {
-        // TODO: Save photo to album
-//        UIImageWriteToSavedPhotosAlbum(photo!, self, #selector(image(_:didFinishSavingWithError:contextInfo:)), nil)
+        if let selectedImageData = selectedPhoto?.image, let image = UIImage(data: selectedImageData) {
+            UIImageWriteToSavedPhotosAlbum(image, self, #selector(image(_:didFinishSavingWithError:contextInfo:)), nil)
+        }
     }
     
     @objc func image(_ image: UIImage, didFinishSavingWithError error: NSError?, contextInfo: UnsafeRawPointer) {
