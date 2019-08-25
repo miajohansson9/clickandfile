@@ -78,6 +78,9 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         // Save all newly created albums
         dataLayer.save()
 
+        // Assign prevous photos to these new albums
+        viewModel.reorganizeOldPhotos()
+
         viewModel.update()
     }
     
