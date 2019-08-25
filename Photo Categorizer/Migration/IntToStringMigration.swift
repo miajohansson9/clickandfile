@@ -10,7 +10,7 @@ import CoreData
 
 public class IntToStringMigration: NSEntityMigrationPolicy {
     @objc public func convertIntToString(_ input: Int16) -> String? {
-        print("going through converstion")
+        print("going through migration")
         return String(input)
     }
 }
