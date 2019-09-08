@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="lap-dW-zf0">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="hD5-lK-NiR">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -203,13 +203,13 @@ Upgrade now to get...
         <!--Category-->
         <scene sceneID="0jk-DA-t7W">
             <objects>
-                <viewController id="ZLy-Bf-eBY" customClass="CategoryAlbumViewController" customModule="Photo_Categorizer" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="categoryAlbum" id="ZLy-Bf-eBY" customClass="CategoryAlbumViewController" customModule="Photo_Categorizer" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="IMD-fA-mBV">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Oje-Ev-vVQ">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="g2U-uX-QmO">
                                     <size key="itemSize" width="168" height="156"/>
@@ -228,16 +228,26 @@ Upgrade now to get...
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="sT5-hF-awp">
                                                     <rect key="frame" x="0.0" y="0.0" width="168" height="156"/>
                                                 </imageView>
+                                                <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="selected" translatesAutoresizingMaskIntoConstraints="NO" id="3nP-8s-dA3">
+                                                    <rect key="frame" x="13" y="30" width="25" height="25"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="25" id="HYp-XF-Fkr"/>
+                                                        <constraint firstAttribute="width" constant="25" id="a7e-Qo-Lsv"/>
+                                                    </constraints>
+                                                </imageView>
                                             </subviews>
                                         </view>
                                         <constraints>
+                                            <constraint firstItem="3nP-8s-dA3" firstAttribute="leading" secondItem="Nbe-SQ-TZg" secondAttribute="leadingMargin" constant="5" id="PNU-KL-f54"/>
                                             <constraint firstItem="sT5-hF-awp" firstAttribute="top" secondItem="Nbe-SQ-TZg" secondAttribute="top" id="Pgl-8D-3mI"/>
                                             <constraint firstAttribute="bottom" secondItem="sT5-hF-awp" secondAttribute="bottom" id="lsE-Bo-0fD"/>
                                             <constraint firstAttribute="trailing" secondItem="sT5-hF-awp" secondAttribute="trailing" id="vhS-Ec-a4l"/>
                                             <constraint firstItem="sT5-hF-awp" firstAttribute="leading" secondItem="Nbe-SQ-TZg" secondAttribute="leading" id="voJ-qI-zMZ"/>
+                                            <constraint firstItem="3nP-8s-dA3" firstAttribute="top" secondItem="Nbe-SQ-TZg" secondAttribute="topMargin" constant="2" id="xIV-SS-coI"/>
                                         </constraints>
                                         <connections>
                                             <outlet property="CategoryAlbumCellImage" destination="sT5-hF-awp" id="McN-cV-xXe"/>
+                                            <outlet property="selectedImageView" destination="3nP-8s-dA3" id="0bF-eA-IRC"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -283,12 +293,12 @@ Upgrade now to get...
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mhk-DI-n7S" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1336.8" y="896.40179910044981"/>
+            <point key="canvasLocation" x="2276" y="896"/>
         </scene>
         <!--Show Full View Controller-->
         <scene sceneID="hQM-qB-sBk">
             <objects>
-                <viewController id="zMb-8J-UuC" customClass="ShowFullViewController" customModule="Photo_Categorizer" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="fullView" id="zMb-8J-UuC" customClass="ShowFullViewController" customModule="Photo_Categorizer" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="WAf-P8-UJD">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -318,10 +328,10 @@ Upgrade now to get...
                                 </items>
                             </toolbar>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yx2-Q7-0Bn">
-                                <rect key="frame" x="0.0" y="64" width="375" height="559"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="603"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zji-iQ-KRa">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="559"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                                     </imageView>
                                 </subviews>
                                 <constraints>
@@ -337,7 +347,7 @@ Upgrade now to get...
                                 </connections>
                             </scrollView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WpW-la-wRw" customClass="GADBannerView">
-                                <rect key="frame" x="27.5" y="64" width="320" height="50"/>
+                                <rect key="frame" x="27.5" y="20" width="320" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="320" id="GEo-hb-647"/>
                                     <constraint firstAttribute="height" constant="50" id="aOi-5h-r19"/>
@@ -371,7 +381,7 @@ Upgrade now to get...
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sPB-et-wvs" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="Ejh-Vh-bCW" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2216.8000000000002" y="897.30134932533736"/>
+            <point key="canvasLocation" x="3156" y="896"/>
         </scene>
         <!--My Albums-->
         <scene sceneID="sxH-uc-PV2">
@@ -475,13 +485,11 @@ Upgrade now to get...
                     <connections>
                         <outlet property="editLabel" destination="MVT-qb-det" id="XOh-MA-qqS"/>
                         <outlet property="homeCollectionView" destination="xkm-VA-WWX" id="tct-Zz-VBJ"/>
-                        <segue destination="kUP-8h-XoF" kind="show" identifier="toCamera" id="xgj-qg-Duo"/>
-                        <segue destination="ZLy-Bf-eBY" kind="show" identifier="toCategoryAlbum" id="fJP-rP-x1F"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lNO-Vj-qR8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1336.8" y="112.89355322338831"/>
+            <point key="canvasLocation" x="2276" y="112.89355322338831"/>
         </scene>
         <!--Camera View Controller-->
         <scene sceneID="sPH-IN-oge">
@@ -492,7 +500,7 @@ Upgrade now to get...
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <activityIndicatorView hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="DGP-BS-edi">
-                                <rect key="frame" x="169" y="347" width="37" height="37"/>
+                                <rect key="frame" x="169" y="325" width="37" height="37"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="37" id="E5f-tf-5ML"/>
                                     <constraint firstAttribute="height" constant="37" id="NWe-7D-5FD"/>
@@ -519,7 +527,7 @@ Upgrade now to get...
                                     <constraint firstAttribute="width" constant="80" id="So1-Uq-yfJ"/>
                                 </constraints>
                                 <connections>
-                                    <segue destination="ZLy-Bf-eBY" kind="show" id="RsU-We-wle"/>
+                                    <action selector="previewButtonAction:" destination="kUP-8h-XoF" eventType="touchUpInside" id="R5w-f0-Bn4"/>
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="R4A-b6-s7P">
@@ -530,7 +538,7 @@ Upgrade now to get...
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="esF-Y7-iyc">
-                                <rect key="frame" x="15" y="76" width="22" height="23"/>
+                                <rect key="frame" x="15" y="32" width="22" height="23"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="22" id="OuW-1g-VTH"/>
                                     <constraint firstAttribute="height" constant="23" id="oWN-9c-EYK"/>
@@ -541,7 +549,7 @@ Upgrade now to get...
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RGi-Xy-88h">
-                                <rect key="frame" x="323" y="72" width="32" height="31"/>
+                                <rect key="frame" x="323" y="28" width="32" height="31"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="32" id="MeI-Qp-Lbh"/>
                                     <constraint firstAttribute="height" constant="31" id="vyN-UM-GY6"/>
@@ -589,26 +597,25 @@ Upgrade now to get...
                     </connections>
                 </pinchGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="2216.8000000000002" y="112.89355322338831"/>
+            <point key="canvasLocation" x="3156" y="112.89355322338831"/>
         </scene>
-        <!--Navigation View Controller-->
-        <scene sceneID="D8b-xg-Ycy">
+        <!--Navigation Controller-->
+        <scene sceneID="e1W-dZ-bTR">
             <objects>
-                <navigationController storyboardIdentifier="Nav" automaticallyAdjustsScrollViewInsets="NO" id="lap-dW-zf0" customClass="NavigationViewController" customModule="Photo_Categorizer" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="hD5-lK-NiR" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="63D-i7-YhU">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="k5Y-ZM-wzw">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="tintColor" red="0.20329561830000001" green="0.47282403709999998" blue="0.96478921179999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="aaz-CA-Bd5" kind="relationship" relationship="rootViewController" id="iuT-TQ-tzl"/>
+                        <segue destination="aaz-CA-Bd5" kind="relationship" relationship="rootViewController" id="91j-ep-wbS"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Ri6-p9-UEh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xxC-YQ-fRr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="484" y="113"/>
+            <point key="canvasLocation" x="1336.8" y="112.89355322338831"/>
         </scene>
     </scenes>
     <resources>
@@ -619,11 +626,9 @@ Upgrade now to get...
         <image name="download" width="40" height="40"/>
         <image name="edit" width="128" height="128"/>
         <image name="plus" width="50" height="50"/>
+        <image name="selected" width="57" height="58"/>
         <image name="switch" width="512" height="512"/>
         <image name="trash" width="100" height="100"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="RsU-We-wle"/>
-    </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.20000000300000001" green="0.20000000300000001" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
 </document>
