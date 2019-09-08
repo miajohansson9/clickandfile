@@ -36,7 +36,6 @@
 		E1C6E4CE203CBF5A005216E5 /* ShowFullViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1C6E4CD203CBF5A005216E5 /* ShowFullViewController.swift */; };
 		E1D31AD8203907250066E9A0 /* CategoryAlbumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D31AD7203907250066E9A0 /* CategoryAlbumViewController.swift */; };
 		E1D31ADA203907630066E9A0 /* CategoryAlbumCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D31AD9203907630066E9A0 /* CategoryAlbumCollectionViewCell.swift */; };
-		E1D7818B20395585003AF1C6 /* NavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D7818A20395585003AF1C6 /* NavigationViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -74,7 +73,6 @@
 		E1C9603B22033E0200A2D982 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E1D31AD7203907250066E9A0 /* CategoryAlbumViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryAlbumViewController.swift; sourceTree = "<group>"; };
 		E1D31AD9203907630066E9A0 /* CategoryAlbumCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryAlbumCollectionViewCell.swift; sourceTree = "<group>"; };
-		E1D7818A20395585003AF1C6 /* NavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,7 +97,6 @@
 				E1AF3E51203BAFAC000CDF49 /* PopUpViewController.swift */,
 				E112198921D9876C00E4F220 /* PremiumViewController.swift */,
 				E1C6E4CD203CBF5A005216E5 /* ShowFullViewController.swift */,
-				E1D7818A20395585003AF1C6 /* NavigationViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -346,7 +343,6 @@
 				53112A82230A2EC3004BFADC /* HomeViewModel.swift in Sources */,
 				E1B28D012035E7C100EA29A9 /* Images+CoreDataClass.swift in Sources */,
 				53112A89230A2F59004BFADC /* Album+CoreDataProperties.swift in Sources */,
-				E1D7818B20395585003AF1C6 /* NavigationViewController.swift in Sources */,
 				E1D31ADA203907630066E9A0 /* CategoryAlbumCollectionViewCell.swift in Sources */,
 				53112A7C2309FC79004BFADC /* CoreDataManager.swift in Sources */,
 				E112198A21D9876C00E4F220 /* PremiumViewController.swift in Sources */,

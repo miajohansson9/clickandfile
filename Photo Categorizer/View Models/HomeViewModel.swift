@@ -9,14 +9,14 @@
 import Foundation
 
 // Protocol that will inform view controller of updates
-protocol HomeViewModelDelegate {
+protocol HomeViewModelDelegate: class {
     func updatesReady()
 }
 
 class HomeViewModel {
 
     // The delgate of this view model.
-    var delegate: HomeViewModelDelegate?
+    weak var delegate: HomeViewModelDelegate?
 
     // Albums retrieved from database
     var albums: [Album]?
@@ -108,16 +108,26 @@ class HomeViewModel {
         // Get all albums and sort them
         fetchLatestAlbums()
 
-        guard let currentAlbums = albums else { return }
+        guard let currentAlbums = albums, tempImageArray.count != 0 else { return }
 
-        for index in 0...tempImageArray.count - 1 {
-
-            let imagesForAlbum = tempImageArray[index]
-            let currentAlbumForSection = currentAlbums[index]
+        if tempImageArray.count == 1 {
+            let imagesForAlbum = tempImageArray[0]
+            let currentAlbumForSection = currentAlbums[0]
 
             // going through images and fixing IDs
             for image in imagesForAlbum {
                 image.category = currentAlbumForSection.id
+            }
+        } else {
+            for index in 0...tempImageArray.count - 1 {
+
+                let imagesForAlbum = tempImageArray[index]
+                let currentAlbumForSection = currentAlbums[index]
+
+                // going through images and fixing IDs
+                for image in imagesForAlbum {
+                    image.category = currentAlbumForSection.id
+                }
             }
         }
 

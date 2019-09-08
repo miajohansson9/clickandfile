@@ -79,8 +79,6 @@ class CameraViewController: UIViewController, UIGestureRecognizerDelegate {
             view.bringSubview(toFront: back)
             view.bringSubview(toFront: activityIndicator)
             
-            captureSession.startRunning()
-            
             // toggle the camera
             toggleCameraGestureRecognizer.numberOfTapsRequired = 2
             toggleCameraGestureRecognizer.addTarget(self, action: #selector(toggleCamera))
@@ -94,6 +92,9 @@ class CameraViewController: UIViewController, UIGestureRecognizerDelegate {
         super.viewWillAppear(animated)
         captureSession.sessionPreset = AVCaptureSession.Preset.photo
 
+        // Setting this resolution to not use too much ram in displaying all of the high quality images at once
+        captureSession.sessionPreset = .vga640x480
+
         if let lastImage = getLastPhotoOfAlbum() {
             imageView.isHidden = false
             imageView.image = lastImage
@@ -101,8 +102,20 @@ class CameraViewController: UIViewController, UIGestureRecognizerDelegate {
             imageView.isHidden = true
         }
 
+        // Hide navigation bar
         navigationController?.setToolbarHidden(true, animated: true)
         self.navigationController?.setNavigationBarHidden(true, animated: true)
+
+        // Starting Camera
+        captureSession.startRunning()
+
+        navigationController?.setToolbarHidden(true, animated: true)
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        captureSession.stopRunning()
     }
 
     func getLastPhotoOfAlbum() -> UIImage? {
@@ -171,6 +184,7 @@ class CameraViewController: UIViewController, UIGestureRecognizerDelegate {
 
         // Initializating the settings and capturing photo
         let settings = AVCapturePhotoSettings(format: [AVVideoCodecKey : AVVideoCodecType.jpeg])
+        settings.isHighResolutionPhotoEnabled = false
         stillImageOutput.capturePhoto(with: settings, delegate: self)
     }
 
@@ -185,7 +199,7 @@ class CameraViewController: UIViewController, UIGestureRecognizerDelegate {
         storedImage.image = data
         storedImage.category = albumSelected?.id
         //TODO: set migration from int to string
-//        storedImage.id = UUID().uuidString
+        storedImage.id = UUID().uuidString
         imagesDataLayer.save()
 
         //TODO: reload data

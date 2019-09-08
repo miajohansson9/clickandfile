@@ -20,7 +20,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     var editSelected = false
 
     // View model in charge of getting all information needed for this view controller
-    var viewModel = HomeViewModel()
+    var viewModel: HomeViewModel?
 
     // data layer to create albums if needed
     var dataLayer = PersistanceLayer<Album>()
@@ -33,38 +33,48 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        //TODO: use this in migration to convert objects saved in user defaults into core data
-//        categories = defaults.object(forKey: "AllCategories") as? [String] ?? [String]()
-
-        viewModel.delegate = self
-
-        addBasicAlbumsIfNecessary()
         
         IAPService.shared.getProducts()
         
         homeCollectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "Cell")
-        NotificationCenter.default.addObserver(self, selector: #selector(loadList), name: NSNotification.Name(rawValue: "load"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(goToPopUp), name: NSNotification.Name(rawValue: "goToPopUp"), object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+
+        //Initialize model and get latest results
+        viewModel = HomeViewModel()
+        viewModel?.delegate = self
+
+        addBasicAlbumsIfNecessary()
+
         // Show the Navigation Bar
         navigationController?.setToolbarHidden(true, animated: true)
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         homeCollectionView.reloadData()
         print("view will appear")
         didUpgrade()
+
+        //Adding observers
+        NotificationCenter.default.addObserver(self, selector: #selector(loadList), name: NSNotification.Name(rawValue: "load"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(goToPopUp), name: NSNotification.Name(rawValue: "goToPopUp"), object: nil)
+    }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        viewModel = nil
+
+        // Removing self from notification center
+        NotificationCenter.default.removeObserver(self)
     }
 
     func addBasicAlbumsIfNecessary() {
 
-        viewModel.fetchLatestAlbums()
+        viewModel?.fetchLatestAlbums()
 
-        guard viewModel.albums?.count ?? 0 < 1 else {
+        guard viewModel?.albums?.count ?? 0 < 1 else {
             // No need to create 5 new albums, at least one exists
-            viewModel.update()
+            viewModel?.update()
             return
         }
 
@@ -79,9 +89,9 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         dataLayer.save()
 
         // Assign prevous photos to these new albums
-        viewModel.reorganizeOldPhotos()
+        viewModel?.reorganizeOldPhotos()
 
-        viewModel.update()
+        viewModel?.update()
     }
     
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
@@ -92,7 +102,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
 
     @objc func loadList(notification: NSNotification){
         //load data here
-        homeCollectionView.reloadData()
+        viewModel?.update()
     }
     
     func collectionView(_ collectionView: UICollectionView,
@@ -116,7 +126,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // The + 1 is to allow the user to select to add an album
-        return (viewModel.albums?.count ?? 0) + 1
+        return (viewModel?.albums?.count ?? 0) + 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -128,10 +138,10 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         cell.thumbnailImage.layer.cornerRadius = 5.0
         cell.thumbnailImage.clipsToBounds = true
         
-        if indexPath.row < viewModel.albums?.count ?? 0 {
+        if indexPath.row < viewModel?.albums?.count ?? 0 {
 
             // Getting specific album for this cell
-            guard let cellAlbum = viewModel.albums?[indexPath.row] else {
+            guard let cellAlbum = viewModel?.albums?[indexPath.row] else {
                 // Unable to get album
                 return UICollectionViewCell()
             }
@@ -171,13 +181,13 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
 
         //selectedArray is what's keeping track of which albums are being selected
 
-        guard let albumSelected = viewModel.albums?[indexPath.row] else {
-            // Unable to get selected album
-            return
-        }
-
         // edit selected is based on the bar button to select multiple albums
-        if editSelected && indexPath.row < viewModel.albums?.count ?? 0 {
+        if editSelected && indexPath.row < viewModel?.albums?.count ?? 0 {
+
+            guard let albumSelected = viewModel?.albums?[indexPath.row] else {
+                // Unable to get selected album
+                return
+            }
 
             // Checking if the album was previously selected
             let albumPreviouslySelected = selectedAlbums.contains(albumSelected)
@@ -195,7 +205,12 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
             }
 
         } else {
-            if indexPath.row < viewModel.albums?.count ?? 0 {
+            if indexPath.row < viewModel?.albums?.count ?? 0 {
+
+                guard let albumSelected = viewModel?.albums?[indexPath.row] else {
+                    // Unable to get selected album
+                    return
+                }
 
                 // Initializing next view controller
                 guard let cameraVC = self.storyboard?.instantiateViewController(withIdentifier: "Camera") as? CameraViewController else {
@@ -239,7 +254,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
                 navigationController?.setToolbarHidden(true, animated: true)
                 editSelected = false
 
-                let numberOfAlbums = viewModel.albums?.count ?? 0
+                let numberOfAlbums = viewModel?.albums?.count ?? 0
                 for index in 1...numberOfAlbums {
                     homeCollectionView.cellForItem(at: [0, index])?.contentView.alpha = 1
                 }
@@ -282,7 +297,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         navigationController?.setToolbarHidden(true, animated: true)
         editSelected = false
 
-        let numberOfAlbums = viewModel.albums?.count ?? 0
+        let numberOfAlbums = viewModel?.albums?.count ?? 0
         for index in 1...numberOfAlbums {
             homeCollectionView.cellForItem(at: [0, index])?.contentView.alpha = 1
         }
@@ -299,7 +314,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
 
         deselectAll()
         selectedAlbums.removeAll()
-        viewModel.update()
+        viewModel?.update()
     }
     
     func didUpgrade() {
@@ -366,12 +381,12 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
             let touchPoint = gestureRecognizer.location(in: homeCollectionView)
             if let indexPath = homeCollectionView.indexPathForItem(at: touchPoint) {
 
-                guard let selectedAlbum = viewModel.albums?[indexPath.row] else {
+                guard let selectedAlbum = viewModel?.albums?[indexPath.row] else {
                     print("unable to get selected album")
                     return
                 }
 
-                if indexPath.row < viewModel.albums?.count ?? 0 {
+                if indexPath.row < viewModel?.albums?.count ?? 0 {
 
                     // Initializing next view controller
                     guard let categoryAlbumVC = self.storyboard?.instantiateViewController(withIdentifier: "categoryAlbum") as? CategoryAlbumViewController else {

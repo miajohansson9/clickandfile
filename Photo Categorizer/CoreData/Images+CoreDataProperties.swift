@@ -19,6 +19,6 @@ extension Images {
 
     @NSManaged public var image: Data?
     @NSManaged public var category: String?
-    @NSManaged public var id: Int16
+    @NSManaged public var id: String
 
 }

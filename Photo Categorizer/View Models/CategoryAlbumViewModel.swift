@@ -6,16 +6,16 @@
 //  Copyright © 2019 Johansson. All rights reserved.
 //
 
-import Foundation
+import UIKit
 import CoreData
 
-protocol CategoryAlbumViewModelDelegate {
+protocol CategoryAlbumViewModelDelegate: class {
     func fetchedData()
 }
 
 class CategoryAlbumViewModel {
 
-    var delegate: CategoryAlbumViewModelDelegate?
+    weak var delegate: CategoryAlbumViewModelDelegate?
 
     // All pictures within the selected Album
     var allPictures = [Images]()

@@ -11,17 +11,14 @@ import CoreData
 import GoogleMobileAds
 
 private let reuseIdentifier = "Cell"
-var selectedCell: Int?
-
 class CategoryAlbumViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, GADBannerViewDelegate {
-    var editSelected = false
-    var imageViews = [UIImageView]()
 
     @IBOutlet var selectOrCancel: UIBarButtonItem!
     @IBOutlet var categoryTitle: UINavigationItem!
     @IBOutlet weak var banner2: GADBannerView!
     @IBOutlet var collectionViewAlbum: UICollectionView!
-    var i = 0
+
+    var editSelected = false
 
     // view model to get all data from
     var viewModel: CategoryAlbumViewModel?
@@ -37,14 +34,6 @@ class CategoryAlbumViewController: UIViewController, UICollectionViewDataSource,
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        guard let userSelectedAlbum = selectedAlbum else { return }
-
-        viewModel = CategoryAlbumViewModel(selectedAlbum: userSelectedAlbum)
-        viewModel?.delegate = self
-        viewModel?.fetchLatestPictures()
-        
-        categoryTitle.title = selectedAlbum?.name
         
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 2, right: 0)
@@ -72,10 +61,25 @@ class CategoryAlbumViewController: UIViewController, UICollectionViewDataSource,
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+
+        // Load view model
+        guard let userSelectedAlbum = selectedAlbum else { return }
+
+        viewModel = CategoryAlbumViewModel(selectedAlbum: userSelectedAlbum)
+        viewModel?.delegate = self
+        viewModel?.fetchLatestPictures()
+
+        categoryTitle.title = selectedAlbum?.name
+
         // Show the Navigation Bar
         navigationController?.setToolbarHidden(true, animated: true)
         self.navigationController?.setNavigationBarHidden(false, animated: true)
-        collectionViewAlbum.reloadData()
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        viewModel = nil
     }
     
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
@@ -135,9 +139,6 @@ class CategoryAlbumViewController: UIViewController, UICollectionViewDataSource,
             selectOrCancel.title = "Select"
             navigationController?.setToolbarHidden(true, animated: true)
             editSelected = false
-            for i in imageViews {
-                i.isHidden = true
-            }
 
             let numberOfPictures = viewModel?.allPictures.count ?? 0
             for index in 1...numberOfPictures {
@@ -152,9 +153,9 @@ class CategoryAlbumViewController: UIViewController, UICollectionViewDataSource,
     @objc func delete (sender:UIBarButtonItem) {
         var message: String
         if selectedImages?.count == 1 {
-            message = "Are you sure you want to delete \(selectedImages?.count) photo?"
+            message = "Are you sure you want to delete \(String(describing: selectedImages?.count)) photo?"
         } else {
-            message = "Are you sure you want to delete \(selectedImages?.count) photos?"
+            message = "Are you sure you want to delete \(String(describing: selectedImages?.count)) photos?"
         }
         
         let alert = UIAlertController(title: "Delete Photos", message: message, preferredStyle: UIAlertControllerStyle.alert)
@@ -174,9 +175,6 @@ class CategoryAlbumViewController: UIViewController, UICollectionViewDataSource,
         selectOrCancel.title = "Select"
         navigationController?.setToolbarHidden(true, animated: true)
         editSelected = false
-        for i in imageViews {
-            i.isHidden = true
-        }
 
         let numberOfPictures = viewModel?.allPictures.count ?? 0
         for index in 1...numberOfPictures {
@@ -194,15 +192,13 @@ class CategoryAlbumViewController: UIViewController, UICollectionViewDataSource,
             guard let selectedImage = selectedImages?[indexPath.row] else { return }
 
             if collectionViewAlbum.cellForItem(at: indexPath)?.contentView.alpha == 1 {
-                imageViews[indexPath[1]].isHidden = false
                 collectionViewAlbum.cellForItem(at: indexPath)?.contentView.alpha = 0.8
                 selectedImages?.append(selectedImage)
             } else {
-                imageViews[indexPath[1]].isHidden = true
                 collectionViewAlbum.cellForItem(at: indexPath)?.contentView.alpha = 1
 
-                selectedImages?.removeAll(where: { image -> Bool in
-                    return image == selectedImage
+                selectedImages?.removeAll(where: { (image) -> Bool in
+                    return image.id == selectedImage.id
                 })
             }
         } else {
@@ -222,8 +218,6 @@ class CategoryAlbumViewController: UIViewController, UICollectionViewDataSource,
             self.navigationController?.pushViewController(fullScreenVC, animated: true)
         }
     }
-    
-    @IBAction func unwindToVC1(segue:UIStoryboardSegue) { }
 }
 
 extension CategoryAlbumViewController: CategoryAlbumViewModelDelegate {
