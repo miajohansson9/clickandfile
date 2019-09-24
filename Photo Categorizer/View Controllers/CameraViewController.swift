@@ -62,7 +62,13 @@ class CameraViewController: UIViewController, UIGestureRecognizerDelegate {
         currentDevice = backFacingCamera
 
         do {
-            let captureDeviceInput = try AVCaptureDeviceInput(device: currentDevice!)
+
+            guard let device = currentDevice else {
+                print("Unable to get current device")
+                return
+            }
+
+            let captureDeviceInput = try AVCaptureDeviceInput(device: device)
             
             captureSession.addInput(captureDeviceInput)
             captureSession.addOutput(stillImageOutput)
